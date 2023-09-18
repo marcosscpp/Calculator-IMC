@@ -1,0 +1,150 @@
+:root {
+  --corpo: #f5ece8;
+  --borda-wrapper: #ee6520;
+  --neutro: #1a1818;
+}
+
+.dark-theme:root {
+  --corpo: #161618;
+  --borda-wrapper: #007942;
+  --neutro: #d4d0e3;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  font-family: "Rubik", sans-serif;
+  transition: background 0.5s, color 0.5s;
+}
+
+body,
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--corpo);
+}
+
+main {
+  height: 100vh;
+}
+
+main,
+.formulario,
+.form-wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.form-wrapper {
+  border-radius: 6px;
+  border: solid var(--borda-wrapper) 3px;
+  padding: 40px;
+}
+
+.main-title {
+  color: var(--neutro);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.conjunto-inputs {
+  display: flex;
+  gap: 30px;
+}
+
+.parte-form {
+  position: relative;
+}
+
+.campo {
+  background: var(--corpo);
+  color: var(--neutro);
+  border: none;
+  border-bottom: 2px solid var(--neutro);
+  padding: 8px 0;
+}
+
+.campo:focus {
+  outline: none;
+}
+
+.campo:focus ~ .legenda,
+.campo:not(:placeholder-shown) ~ .legenda {
+  transform: translateY(-120%);
+  transition: 0.2s;
+}
+
+.legenda {
+  color: var(--neutro);
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+}
+
+.resultado {
+  min-height: 20px;
+  color: var(--neutro);
+}
+
+.btn {
+  background: var(--corpo);
+  border: 2px solid var(--borda-wrapper);
+  color: var(--borda-wrapper);
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 6px;
+  margin-top: 20px;
+  padding: 10px 20px;
+}
+
+.btn:hover {
+  background: var(--borda-wrapper);
+  color: var(--corpo);
+  transition: 0.2s;
+}
+
+.toogle {
+  align-items: center;
+  background: var(--borda-wrapper);
+  border-radius: 10px;
+  display: flex;
+  width: 40px;
+  height: 20px;
+  margin: 10px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.toogle-btn {
+  width: 16px;
+  height: 16px;
+  background: var(--corpo);
+  border-radius: 100px;
+  margin: 0 3px;
+  transition: 0.2s transform;
+}
+
+.toogle-btn.dark-theme {
+  transform: translateX(1.2em);
+}
