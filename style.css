@@ -2,11 +2,12 @@
   --corpo: #f5ece8;
   --borda-wrapper: #ee6520;
   --neutro: #1a1818;
+  --cor-texto: #000;
 }
 
 .dark-theme:root {
   --corpo: #161618;
-  --borda-wrapper: #007942;
+  --borda-wrapper: #008dc5;
   --neutro: #d4d0e3;
 }
 
@@ -53,7 +54,7 @@ main,
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 20px;
+  gap: 40px;
 }
 
 .form-wrapper {
@@ -62,9 +63,9 @@ main,
   padding: 40px;
 }
 
+
 .main-title {
   color: var(--neutro);
-  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -92,7 +93,7 @@ main,
 .campo:focus ~ .legenda,
 .campo:not(:placeholder-shown) ~ .legenda {
   transform: translateY(-120%);
-  transition: 0.2s;
+  transition: transform 0.2s;
 }
 
 .legenda {
@@ -104,7 +105,7 @@ main,
 
 .resultado {
   min-height: 20px;
-  color: var(--neutro);
+  color: var(--cor-texto);
 }
 
 .btn {
@@ -114,7 +115,6 @@ main,
   font-weight: 500;
   cursor: pointer;
   border-radius: 6px;
-  margin-top: 20px;
   padding: 10px 20px;
 }
 
@@ -147,4 +147,86 @@ main,
 
 .toogle-btn.dark-theme {
   transform: translateX(1.2em);
+}
+
+.output {
+  align-items: center;
+  border: 1px var(--neutro) solid;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  min-height: 250px;
+  min-width: 70%;
+  padding: 20px;
+}
+
+.imagem {
+  border: var(--cor-texto) solid 3px;
+  box-shadow: 0 0 7px rgba(134, 133, 133, 0.97);
+  border-radius: 10px;
+  display: none;
+  padding: 15px;
+  width: 100px;
+}
+
+.imagem.ativo {
+  display: block;
+}
+
+
+@media (max-width: 500px) {
+  .form-wrapper {
+    align-items: center;
+    border: none; 
+    justify-content: space-around; 
+    height: calc(100vh);
+    gap: 0;
+  }
+
+  .main-title {
+    font-size: 9vw;
+  }
+
+  .formulario {
+    gap: 70px;
+  }  
+
+  .conjunto-inputs {
+    flex-direction: column;
+    gap: 50px;
+    justify-content: space-between;
+    height: 100px;
+  }
+
+  .legenda {
+    width: 100%;
+    font-size: 5vw;
+    text-align: center;
+  }
+
+  .campo {
+    font-size: 4vw;
+    width: 70vw;
+  }
+
+  .btn {
+    padding: 2.5vw 5vw;
+    font-size: 4vw;
+    width: 30vw;
+  }
+
+  .resultado {
+    font-size: 5vw;
+  }
+
+  .output {
+    min-width: 12vw;
+  }
+
+  .imagem {
+    width: 20vw;
+  }
+  
 }

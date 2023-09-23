@@ -1,31 +1,29 @@
-const peso: HTMLInputElement | null = document.getElementById(
+const peso: HTMLInputElement = document.getElementById(
   "peso"
 ) as HTMLInputElement;
-const altura: HTMLInputElement | null = document.getElementById(
+const altura: HTMLInputElement = document.getElementById(
   "altura"
 ) as HTMLInputElement;
+const btn: HTMLElement = document.querySelector(
+  '[value="Calcular"]'
+) as HTMLElement;
+const resultado: HTMLElement = document.querySelector(
+  ".resultado"
+) as HTMLElement;
 
 altura.setAttribute("placeholder", " ");
 peso.setAttribute("placeholder", " ");
 
-const toogle: HTMLElement | null = document.querySelector(".toogle");
-const toogleBtn: HTMLElement | null | undefined =
-  toogle?.firstElementChild as HTMLElement;
+const toogle: HTMLElement = document.querySelector(".toogle") as HTMLElement;
+const toogleBtn: HTMLElement = toogle?.firstElementChild as HTMLElement;
 
 toogle?.addEventListener("click", () => {
   document.documentElement.classList.toggle("dark-theme");
   toogleBtn.classList.toggle("dark-theme");
 });
 
-const btn: HTMLElement | null = document.querySelector(
-  '[value="Calcular"]'
-) as HTMLElement;
-const resultado: HTMLElement | null = document.querySelector(
-  ".resultado"
-) as HTMLElement;
-
-function calcularIMC(massa: number, altura: number): string {
-  const resultado = massa / altura ** 2;
+function calcularIMC(peso: number, altura: number): string {
+  const resultado = peso / altura ** 2;
   if (isNaN(resultado)) {
     return "Ta doidao";
   }
@@ -37,7 +35,6 @@ function getStatusPeso(imc: string): string {
   if (isNaN(numImc)) {
     return "problematico voce ein";
   }
-
   if (numImc < 18.5) {
     return "Abaixo do peso";
   } else if (numImc >= 18.5 && numImc < 24.9) {
@@ -53,9 +50,47 @@ function getStatusPeso(imc: string): string {
   }
 }
 
+function defineResultVisual(
+  cssVariable: string,
+  domElement: HTMLElement,
+  statusPeso: string
+): undefined {
+  const imcClassificacoes: Array<string> = [
+    "Abaixo do peso",
+    "Peso normal",
+    "Sobrepeso",
+    "Obesidade Grau I",
+    "Obesidade Grau II",
+    "Obesidade Grau III",
+  ];
+  const colorList: Array<string> = [
+    "#add8e6",
+    "#054f77",
+    "#0ff",
+    "#ffa500",
+    "#FF0000",
+    "#9B111E",
+  ];
+
+  document.documentElement.style.setProperty(
+    cssVariable,
+    colorList[imcClassificacoes.indexOf(statusPeso)]
+  );
+
+  const imagePath = domElement.setAttribute(
+    "src",
+    "img/" + statusPeso.toLowerCase().split(" ").join("-") + ".png"
+  );
+  domElement.classList.add("ativo");
+}
+
+const image: HTMLElement = document.querySelector(".imagem") as HTMLElement;
+
 btn.addEventListener("click", () => {
   const valorAltura: number = parseFloat(altura.value);
   const valorPeso: number = parseFloat(peso.value);
   const imcCalculado: string = calcularIMC(valorPeso, valorAltura);
-  resultado.innerHTML = `${imcCalculado} - ${getStatusPeso(imcCalculado)}`;
+  const status: string = getStatusPeso(imcCalculado);
+  defineResultVisual("--cor-texto", image, status);
+  resultado.innerHTML = `${imcCalculado} - ${status}`;
 });
