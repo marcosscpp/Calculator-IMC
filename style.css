@@ -22,6 +22,7 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+
 *,
 *::before,
 *::after {
@@ -58,11 +59,10 @@ main,
 }
 
 .form-wrapper {
-  border-radius: 6px;
+  border-radius: 6px 0 6px 6px;
   border: solid var(--borda-wrapper) 3px;
   padding: 40px;
 }
-
 
 .main-title {
   color: var(--neutro);
@@ -151,13 +151,11 @@ main,
 
 .output {
   align-items: center;
-  border: 1px var(--neutro) solid;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   justify-content: center;
-  min-height: 250px;
   min-width: 70%;
   padding: 20px;
 }
@@ -175,12 +173,29 @@ main,
   display: block;
 }
 
+.calculadora {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+}
+
+.historico {
+  height: 140px;
+  width: 140px;
+  border: 3px solid var(--borda-wrapper);
+  border-left: none;
+  overflow-y: scroll;
+}
+
+.historico::-webkit-scrollbar-thumb {
+  background-color: red;
+}
 
 @media (max-width: 500px) {
   .form-wrapper {
     align-items: center;
-    border: none; 
-    justify-content: space-around; 
+    border: none;
+    justify-content: space-around;
     height: calc(100vh);
     gap: 0;
   }
@@ -191,7 +206,7 @@ main,
 
   .formulario {
     gap: 70px;
-  }  
+  }
 
   .conjunto-inputs {
     flex-direction: column;
@@ -228,5 +243,4 @@ main,
   .imagem {
     width: 20vw;
   }
-  
 }

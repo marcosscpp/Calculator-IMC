@@ -1,3 +1,6 @@
+import { Stack } from "./modules/stack";
+
+
 const peso: HTMLInputElement = document.getElementById(
   "peso"
 ) as HTMLInputElement;
@@ -86,11 +89,27 @@ function defineResultVisual(
 
 const image: HTMLElement = document.querySelector(".imagem") as HTMLElement;
 
+const historico: HTMLElement = document.querySelector(".historico");
+const pilhaHistorico: Stack = new Stack(historico);
+
 btn.addEventListener("click", () => {
   const valorAltura: number = parseFloat(altura.value);
   const valorPeso: number = parseFloat(peso.value);
   const imcCalculado: string = calcularIMC(valorPeso, valorAltura);
   const status: string = getStatusPeso(imcCalculado);
   defineResultVisual("--cor-texto", image, status);
+  pilhaHistorico.push(imcCalculado);
   resultado.innerHTML = `${imcCalculado} - ${status}`;
 });
+
+
+
+
+
+
+
+
+
+
+
+
