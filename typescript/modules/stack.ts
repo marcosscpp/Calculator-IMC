@@ -19,27 +19,24 @@ class Node {
 
 export class Stack {
   peek: Node | null;
-  base: Node | null;
   size: number;
   stackDomElement: HTMLElement;
 
   constructor(stackDomElement: HTMLElement) {
     this.peek = null;
-    this.base = null;
     this.size = 0;
     this.stackDomElement = stackDomElement;
   }
 
   push(value: number | string) {
-    const newNode = new Node(value);
+    const newNode : Node = new Node(value);
     if (!this.peek) {
       this.peek = newNode;
-      this.base = newNode;
     } else {
+      if ((newNode.value === this.peek.value)) return;
       const next = this.peek;
       this.peek = newNode;
       this.peek.next = next;
-      console.log(this.peek);
     }
     this.insertNodeDom(newNode);
     return ++this.size;
@@ -47,19 +44,24 @@ export class Stack {
 
   pop() {
     if (!this.peek) return null;
-
     const popElement = this.peek;
-    if (this.peek == this.base) {
-      this.base = null;
-    }
-
     this.peek = this.peek.next;
     this.size--;
     this.removePeek();
     return popElement.value;
   }
 
-  insertNodeDom(node) {
+  clear() {
+    this.peek = null;
+    this.size = 0;
+    this.cleanDom();
+  }
+
+  cleanDom() {
+    this.stackDomElement.innerHTML = "";
+  }
+
+  insertNodeDom(node : Node) {
     this.stackDomElement.appendChild(node.domNode);
   }
 
@@ -69,5 +71,3 @@ export class Stack {
     }
   }
 }
-
-
