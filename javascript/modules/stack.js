@@ -1,16 +1,4 @@
-class Node {
-    constructor(value) {
-        this.value = value;
-        this.next = null;
-        this.domNode = this.initDomNode();
-    }
-    initDomNode() {
-        const domNode = document.createElement("div");
-        domNode.classList.add("node");
-        domNode.innerHTML = this.value.toString();
-        return domNode;
-    }
-}
+import { Node } from "./node.js";
 export class Stack {
     constructor(stackDomElement) {
         this.peek = null;
@@ -23,7 +11,7 @@ export class Stack {
             this.peek = newNode;
         }
         else {
-            if ((newNode.value === this.peek.value))
+            if (newNode.value === this.peek.value)
                 return;
             const next = this.peek;
             this.peek = newNode;
@@ -38,7 +26,6 @@ export class Stack {
         const popElement = this.peek;
         this.peek = this.peek.next;
         this.size--;
-        this.removePeek();
         return popElement.value;
     }
     clear() {
@@ -48,13 +35,24 @@ export class Stack {
     }
     cleanDom() {
         this.stackDomElement.innerHTML = "";
+        localStorage.clear();
     }
     insertNodeDom(node) {
-        this.stackDomElement.appendChild(node.domNode);
+        this.stackDomElement.appendChild(node.domNode());
+        localStorage.setItem("history", JSON.stringify(node));
     }
-    removePeek() {
-        if (this.stackDomElement.lastElementChild) {
-            this.stackDomElement.removeChild(this.stackDomElement.lastElementChild);
+    recoveryData() {
+        if (localStorage.length) {
+            const history = localStorage.getItem("history");
+            let historyObject = JSON.parse(history);
+            this.peek = historyObject;
+            do {
+                if (historyObject) {
+                    this.stackDomElement.innerHTML +=
+                        "<li class='node'>" + historyObject.value + "</li>";
+                    historyObject = historyObject === null || historyObject === void 0 ? void 0 : historyObject.next;
+                }
+            } while (historyObject);
         }
     }
 }

@@ -1,4 +1,4 @@
-import { Node } from "./node";
+import { Node } from "./node.js";
 
 export class Stack {
   peek: Node | null;
@@ -12,11 +12,11 @@ export class Stack {
   }
 
   push(value: number | string) {
-    const newNode : Node = new Node(value);
+    const newNode: Node = new Node(value);
     if (!this.peek) {
       this.peek = newNode;
     } else {
-      if ((newNode.value === this.peek.value)) return;
+      if (newNode.value === this.peek.value) return;
       const next = this.peek;
       this.peek = newNode;
       this.peek.next = next;
@@ -30,7 +30,6 @@ export class Stack {
     const popElement = this.peek;
     this.peek = this.peek.next;
     this.size--;
-    this.removePeek();
     return popElement.value;
   }
 
@@ -42,15 +41,26 @@ export class Stack {
 
   cleanDom() {
     this.stackDomElement.innerHTML = "";
+    localStorage.clear();
   }
 
-  insertNodeDom(node : Node) {
-    this.stackDomElement.appendChild(node.domNode);
+  insertNodeDom(node: Node) {
+    this.stackDomElement.appendChild(node.domNode());
+    localStorage.setItem("history", JSON.stringify(node));
   }
 
-  removePeek() {
-    if (this.stackDomElement.lastElementChild) {
-      this.stackDomElement.removeChild(this.stackDomElement.lastElementChild);
+  recoveryData() {
+    if (localStorage.length) {
+      const history: string = localStorage.getItem("history") as string;
+      let historyObject: Node | null = JSON.parse(history);
+      this.peek = historyObject;
+      do {
+        if (historyObject) {
+          this.stackDomElement.innerHTML +=
+            "<li class='node'>" + historyObject.value + "</li>";
+            historyObject = historyObject?.next;
+        }
+      } while (historyObject);
     }
   }
 }

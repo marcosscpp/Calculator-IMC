@@ -10,7 +10,6 @@ export function initCalculator() {
     const btnCalc = document.querySelector('[value="Calcular"]');
     btnCalc.addEventListener("click", () => {
         const result = calc.displayInfo();
-        console.log(stackHistory);
         stackHistory.push(result);
     });
     const btnLimpar = document.querySelector("[data-clear]");
@@ -25,4 +24,5 @@ export function initCalculator() {
     }
     btnHistorico.addEventListener("click", displayHistory);
     btnFechar.addEventListener("click", displayHistory);
+    stackHistory.recoveryData();
 }

@@ -16,7 +16,6 @@ export function initCalculator() {
   ) as HTMLElement;
 
   const calc: calculadoraImc = new calculadoraImc(peso, altura, resultado);
-
   const stackHistory: Stack = new Stack(historico);
 
   const btnCalc: HTMLElement = document.querySelector(
@@ -25,7 +24,6 @@ export function initCalculator() {
 
   btnCalc.addEventListener("click", () => {
     const result: string = calc.displayInfo();
-    console.log(stackHistory)
     stackHistory.push(result);
   });
 
@@ -50,4 +48,6 @@ export function initCalculator() {
 
   btnHistorico.addEventListener("click", displayHistory);
   btnFechar.addEventListener("click", displayHistory);
+  stackHistory.recoveryData();
+  
 }
