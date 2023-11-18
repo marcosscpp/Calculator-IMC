@@ -17,7 +17,7 @@ export class calculadoraImc {
 
   calcularIMC(peso: number, altura: number): number | string {
     const resultado = peso / altura ** 2;
-    if (isNaN(resultado)) return "dodoi";
+    if (isNaN(resultado)) return "Insira valores válidos";
 
     return Number(resultado.toFixed(2));
   }
@@ -25,7 +25,7 @@ export class calculadoraImc {
   getStatusPeso(imc: number | string): string {
     imc = Number(imc);
     if (isNaN(imc)) {
-      return "problematico voce ein";
+      return "Erro";
     }
     if (imc < 18.5) {
       return "Abaixo do peso";
@@ -48,9 +48,10 @@ export class calculadoraImc {
     statusPeso: string
   ): void {
     const imcClassificacoes: Record<string, string> = {
+      "Erro": "#ff0000",
       "Abaixo do peso": "#add8e6",
       "Peso normal": "#054f77",
-      "Sobrepeso": "#eb7d75",
+      Sobrepeso: "#eb7d75",
       "Obesidade Grau I": "#ffa500",
       "Obesidade Grau II": "#FF0000",
       "Obesidade Grau III": "#9B111E",
@@ -60,12 +61,14 @@ export class calculadoraImc {
 
     document.documentElement.style.setProperty(cssVariable, corSelecionada);
 
-    const imagePath: string = `img/${statusPeso
-      .toLowerCase()
-      .split(" ")
-      .join("-")}.png`;
-    imageDom.setAttribute("src", imagePath);
-    imageDom.classList.add("ativo");
+    if (statusPeso !== "Erro") {
+      const imagePath: string = `img/${statusPeso
+        .toLowerCase()
+        .split(" ")
+        .join("-")}.png`;
+      imageDom.setAttribute("src", imagePath);
+      imageDom.classList.add("ativo");
+    }
   }
 
   displayInfo(): string {

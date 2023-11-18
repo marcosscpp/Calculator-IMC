@@ -222,7 +222,6 @@ main,
   padding: 0;
 }
 
-
 .historico-titulo {
   font-size: 14px;
   text-align: center;
@@ -260,6 +259,10 @@ main,
 .bottom-ico {
   width: 24px;
   align-self: center;
+}
+
+.resultado {
+  transition: none;
 }
 
 @media (max-width: 500px) {
