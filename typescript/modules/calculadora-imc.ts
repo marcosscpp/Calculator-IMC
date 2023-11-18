@@ -48,7 +48,7 @@ export class calculadoraImc {
     statusPeso: string
   ): void {
     const imcClassificacoes: Record<string, string> = {
-      "Erro": "#ff0000",
+      Erro: "#ff0000",
       "Abaixo do peso": "#add8e6",
       "Peso normal": "#054f77",
       Sobrepeso: "#eb7d75",
@@ -68,6 +68,10 @@ export class calculadoraImc {
         .join("-")}.png`;
       imageDom.setAttribute("src", imagePath);
       imageDom.classList.add("ativo");
+    } else {
+      if (imageDom.classList.contains("ativo")) {
+        imageDom.classList.remove("ativo");
+      }
     }
   }
 

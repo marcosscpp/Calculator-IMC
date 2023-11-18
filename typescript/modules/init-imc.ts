@@ -24,6 +24,7 @@ export function initCalculator() {
 
   btnCalc.addEventListener("click", () => {
     const result: string = calc.displayInfo();
+    if (result !== "Insira valores válidos - Erro")
     stackHistory.push(result);
   });
 

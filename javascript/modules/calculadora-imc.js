@@ -32,10 +32,10 @@ export class calculadoraImc {
   }
   defineVisual(cssVariable, imageDom, statusPeso) {
     const imcClassificacoes = {
-        "Erro": "#ff0000",
+      Erro: "#ff0000",
       "Abaixo do peso": "#add8e6",
       "Peso normal": "#054f77",
-      "Sobrepeso": "#eb7d75",
+      Sobrepeso: "#eb7d75",
       "Obesidade Grau I": "#ffa500",
       "Obesidade Grau II": "#FF0000",
       "Obesidade Grau III": "#9B111E",
@@ -49,6 +49,10 @@ export class calculadoraImc {
         .join("-")}.png`;
       imageDom.setAttribute("src", imagePath);
       imageDom.classList.add("ativo");
+    } else {
+      if (imageDom.classList.contains("ativo")) {
+        imageDom.classList.remove("ativo");
+      }
     }
   }
   displayInfo() {
